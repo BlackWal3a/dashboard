@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../static/img/apple-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/img/Tunisair_llogo_Deer.png"
+    />
+    <title>Tunisair Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="../static/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--     Leaflet.js     -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    {% if data.dark_mode == 1 %}
+    <link id="pagestyle" href="/static/css/tunisair-dashboard.css" rel="stylesheet">
+    {% else  %}
+    <link id="pagestyle" href="/static/css/tunisair-dashboard-dark-mode.css" rel="stylesheet">
+    {% endif %}
+  </head>
+
+  <body class="g-sidenav-show bg-gray-100">
+    {% include 'navbar.html' %}
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+        id="navbarBlur"
+        navbar-scroll="true"
+      >
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
+            >
+              <li class="breadcrumb-item text-sm">
+                <a class="opacity-5 text-dark" href="../">Tunisair</a>
+              </li>
+              <li
+                class="breadcrumb-item text-sm text-dark active"
+                aria-current="page"
+              >
+              Geography
+              </li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Geography</h6>
+          </nav>
+          <div
+            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+            id="navbar"
+          >
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item d-flex align-items-center">
+                <a
+                  href="../profile"
+                  class="nav-link text-body font-weight-bold px-0"
+                >
+                  <i class="fa fa-user me-sm-1"></i>
+                  <span class="d-sm-inline d-none">{{data.username}}</span>
+                </a>
+              </li>
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="iconNavbarSidenav"
+                >
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-body p-0">
+                  <i
+                    class="fa fa-cog fixed-plugin-button-nav cursor-pointer"
+                  ></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fa fa-bell cursor-pointer"></i>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../static/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New message</span>
+                            from Laur
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            13 minutes ago
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../static/img/small-logos/logo-spotify.svg"
+                            class="avatar avatar-sm bg-gradient-dark me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New album</span> by
+                            Travis Scott
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            1 day
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div
+                          class="avatar avatar-sm bg-gradient-secondary me-3 my-auto"
+                        >
+                          <svg
+                            width="12px"
+                            height="12px"
+                            viewBox="0 0 43 36"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <title>credit-card</title>
+                            <g
+                              stroke="none"
+                              stroke-width="1"
+                              fill="none"
+                              fill-rule="evenodd"
+                            >
+                              <g
+                                transform="translate(-2169.000000, -745.000000)"
+                                fill="#FFFFFF"
+                                fill-rule="nonzero"
+                              >
+                                <g
+                                  transform="translate(1716.000000, 291.000000)"
+                                >
+                                  <g
+                                    transform="translate(453.000000, 454.000000)"
+                                  >
+                                    <path
+                                      class="color-background"
+                                      d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                      opacity="0.593633743"
+                                    ></path>
+                                    <path
+                                      class="color-background"
+                                      d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"
+                                    ></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            Payment successfully completed
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            2 days
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Top Country
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        {{data.top_country}}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                      <i class="fa fa-globe text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                          Top Town
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        {{data.top_town}}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                      <i class="fa fa-map-marker text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Top StopOver
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        {{data.top_stopover}}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                      <i class="fa fa-plane text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <div class="card z-index-2">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    {% if data.geo_filter == 1%}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By Country (In {{data.unit}})</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By Country (In Dollar)</h6>
+                        {% endif %}
+                    {% elif data.geo_filter == 2%}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By Town (In {{data.unit}})</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By Town (In Dollar)</h6>
+                        {% endif %}
+                    {% else %}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By StopOver (In {{data.unit}})</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By StopOver (In Dollar)</h6>
+                        {% endif %}
+                    {% endif %}
+                    <p class="text-sm mb-0">
+                      <i
+                        class="fa fa-arrow-up text-info"
+                        aria-hidden="true"
+                      ></i>
+                      {% if data.geo_filter == 1%}
+                      <span class="font-weight-bold ms-1">Top Country :</span> {{data.top_filter_selection}}
+                      {% elif data.geo_filter == 2%}
+                      <span class="font-weight-bold ms-1">Top Town :</span> {{data.top_filter_selection}}
+                      {% else %}
+                      <span class="font-weight-bold ms-1">Top StopOver :</span> {{data.top_filter_selection}}
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-5 my-auto text-end">
+                    <div class="dropdown float-lg-end pe-4">
+                      <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v text-secondary" aria-hidden="true"></i>
+                      </a>
+                      <ul class="dropdown-menu px-2 py-3 ms-sm-n9 ms-n5" aria-labelledby="dropdownTable" style="">
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            onclick="reloadCountry(1)"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Country</span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            onclick="reloadCountry(2)"
+                          >
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Town
+                          </span>
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            onclick="reloadCountry(3)"
+                          >
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By StopOver
+                          </span>
+                        </li>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script>
+                           function reloadCountry(value) {
+                              $.ajax({
+                                  type: 'POST',
+                                  url: '/save_date/',
+                                  data: {
+                                      geo_id: value
+                                  },
+                                  success: function(response) {
+                                      // Update session with selected value
+                                      sessionStorage.setItem('overview_list_value', value);
+                                      location.reload();
+                                  },
+                                  error: function(xhr, status, error) {
+                                      console.error('AJAX request failed:', error);
+                                  }
+                              });
+                          }
+                        </script>
+                      </ul>
+                    </div>
+                    <form id="geoDateForm">
+                      {% csrf_token %}
+                      <div class="dropdown float-lg-end pe-4">
+                          <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa fa-calendar text-secondary" aria-hidden="true"></i>
+                          </a>
+                          <ul class="dropdown-menu px-2 py-3 ms-sm-n9 ms-n5" aria-labelledby="dropdownTable">
+                              <li>
+                                  <div class="form-group">
+                                      <label for="selectOption">Select Option:</label>
+                                      <select class="form-control" id="selectOption" onchange="showGeoDateRange()">
+                                          <option value="single">Select All</option>
+                                          <option value="range">Select Geo Time Range</option>
+                                      </select>
+                                  </div>
+
+                                  <div id="geoDateRange" style="display: none;">
+                                      <div class="form-group">
+                                          <label for="startGeoDate">Start Geo Date:</label>
+                                          <input type="date" class="form-control" id="startGeoDate">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="endGeoDate">End Geo Date:</label>
+                                          <input type="date" class="form-control" id="endGeoDate">
+                                      </div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <button type="submit" id="saveGeoBtn" class="btn btn-primary">Save</button>
+                              </li>
+                          </ul>
+                      </div>
+                  </form>
+
+                  <script>
+                    $(document).ready(function() {
+                        $('#geoDateForm').submit(function(e) {
+                            e.preventDefault();  // Prevent the default form submission
+
+                            var formData = {
+                                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                                start_geo_date: $('#startGeoDate').val(),
+                                end_geo_date: $('#endGeoDate').val()
+                            };
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/save_geo_date/',  // Update the URL to match your geography endpoint
+                                data: formData,
+                                success: function(response) {
+                                    console.log(response);
+
+                                    // Reload the page after successful save
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(xhr.responseText);
+                                    // Handle errors if needed
+                                }
+                            });
+                        });
+                    });
+
+                    function showGeoDateRange() {
+                        var selectOption = document.getElementById('selectOption');
+                        var geoDateRange = document.getElementById('geoDateRange');
+
+                        if (selectOption.value === 'range') {
+                            geoDateRange.style.display = 'block';
+                        } else {
+                            geoDateRange.style.display = 'none';
+                        }
+                    }
+                  </script>
+
+                    <div class="dropdown float-lg-end pe-4">
+                      <a
+                          class="cursor-pointer"
+                          id="expenses"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          onclick="sendFilterValue(0)"
+                      >
+                      {% if data.selection_filter_code == 0 %}
+                          <i class="fa fa-coins" aria-hidden="true" style="color: #D40404;"></i>
+                      {% else %}
+                          <i class="fa fa-coins" aria-hidden="true" style="color: #8392AB;"></i>
+                      {% endif %}
+                      </a> 
+                  </div>
+                  <div class="dropdown float-lg-end pe-4">
+                      <a
+                          class="cursor-pointer"
+                          id="fuel"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          onclick="sendFilterValue(1)"
+                      >
+                      {% if data.selection_filter_code == 1 %}
+                          <i class="fa fa-tint" aria-hidden="true" style="color: #D40404;"></i>
+                      {% else %}
+                          <i class="fa fa-tint" aria-hidden="true" style="color: #8392AB;"></i>
+                      {% endif %}
+                      </a> 
+                  </div>
+                  <script>
+                      function sendFilterValue(value) {
+                          $.ajax({
+                              type: 'POST',
+                              url: '/save_date/',
+                              data: {
+                                  tint: value
+                              },
+                              success: function(response) {
+                                  // Update session with selected value
+                                  sessionStorage.setItem('overview_list_value', value);
+                                  location.reload();
+                              },
+                              error: function(xhr, status, error) {
+                                  console.error('AJAX request failed:', error);
+                              }
+                          });
+                      }
+                  </script> 
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="chart">
+                  <!-- Map container -->
+                  {% if data.geo_filter == 1 %}
+                  <div id="map_1" class="chart-canvas" style="height: 500px;"></div>
+                  <style>
+                    #map_1 {
+                        cursor: pointer; /* Set cursor to pointer for clickable regions */
+                    }
+                </style>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    google.charts.load('current', {
+                        'packages': ['geochart'],
+                    });
+                    google.charts.setOnLoadCallback(drawRegionsMap);
+                    
+                    function drawRegionsMap() {
+                        var data = google.visualization.arrayToDataTable({{data.formatted_data|safe}});
+                
+                        var options = {
+                            colorAxis: {colors: ['#FFC8C8' , '#D14848', '#d40404']}, // Change color from white to red
+                            tooltip: {textStyle: {color: 'black'}, trigger: 'focus'}, // Customize tooltip
+                            backgroundColor: 'transparent'
+                          };
+                        var chart = new google.visualization.GeoChart(document.getElementById('map_1'));
+                
+                        chart.draw(data, options);
+                
+                        // Add event listener for select event
+                        google.visualization.events.addListener(chart, 'select', function() {
+                            // Get the selected item (country)
+                            var selection = chart.getSelection();
+                            if (selection.length > 0) {
+                                var item = data.getValue(selection[0].row, 0); // Assuming the country name is in the first column
+                                // Redirect to custom page with country details
+                                window.location.href = '/country_details?country=' + encodeURIComponent(item);
+                            }
+                        });
+                    }
+                </script>
+                  {% elif data.geo_filter == 2 %}
+                  <div id="map_2" class="chart-canvas" style="height: 500px;"></div>
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Function to initialize Leaflet map
+                        function initializeMap(mapElementId) {
+                            var map = L.map(mapElementId);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            }).addTo(map);
+                            return map;
+                        }
+                    
+                        // Function to add markers to the map and resize the map bounds
+                        function addMarkers(map, data) {
+                            return new Promise(function(resolve, reject) {
+                                var promises = [];
+                                var bounds = []; // Initialize an empty bounds array
+                                
+                                data.forEach(function(item) {
+                                    var itemName = item[0];
+                                    var quantity = item[1];
+                                    var searchName = "{{ data.country_code }} " + itemName;
+                                    console.log("searchName:", searchName); // Log the value of searchName to the console
+            
+                                    // Construct the Bing Maps Geocoding API URL
+                                    var apiKey = 'As8cGdY7hdZLbyXrOZXv4oU4IdQ3En7Zl5XoloWZ3X8B3lfRNUQ9RwK6k1q3lOiN';
+                                    var url = `https://dev.virtualearth.net/REST/v1/Locations?q=${encodeURIComponent(searchName)}&key=${apiKey}`;
+            
+                                    var promise = fetch(url)
+                                        .then(function(response) {
+                                            return response.json();
+                                        })
+                                        .then(function(data) {
+                                            if (data.resourceSets && data.resourceSets.length > 0 && data.resourceSets[0].resources.length > 0) {
+                                                var location = data.resourceSets[0].resources[0].point.coordinates;
+                                                var lat = location[0];
+                                                var lon = location[1];
+                                                var marker = L.marker([lat, lon]).addTo(map);
+                                                marker.bindPopup(itemName + '<br>Quantity: ' + quantity + ' {{data.unit}}');
+                                                
+                                                // Add marker position to bounds
+                                                bounds.push([lat, lon]);
+                                            }
+                                        })
+                                        .catch(function(error) {
+                                            console.log('Error geocoding item:', error);
+                                        });
+                                    
+                                    promises.push(promise);
+                                });
+                                
+                                Promise.all(promises)
+                                    .then(function() {
+                                        // Fit the map bounds to include all markers
+                                        if (bounds.length > 0) {
+                                            map.fitBounds(bounds);
+                                        }
+                                        resolve();
+                                    })
+                                    .catch(function(error) {
+                                        reject(error);
+                                    });
+                            });
+                        }
+                        // Get towns data passed from Django view
+                        var townsData = {{ data.formatted_data|safe }};
+                        // Initialize map and add markers
+                        var mapTowns = initializeMap('map_2');
+                        addMarkers(mapTowns, townsData)
+                            .then(function() {
+                                console.log('Markers added successfully');
+                            })
+                            .catch(function(error) {
+                                console.error('Error adding markers:', error);
+                            });
+                          });
+                    
+                </script>
+                  {% else %}
+                  <div id="map_3" class="chart-canvas" style="height: 500px;"></div>
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Function to initialize Leaflet map
+                        function initializeMap(mapElementId) {
+                            var map = L.map(mapElementId);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            }).addTo(map);
+                            return map;
+                        }
+                    
+                        // Function to add markers to the map and resize the map bounds
+                        function addMarkers(map, data) {
+                            return new Promise(function(resolve, reject) {
+                                var promises = [];
+                                var bounds = []; // Initialize an empty bounds array
+                                
+                                data.forEach(function(item) {
+                                    var itemName = item[0];
+                                    var quantity = item[1];
+                                    var searchName = "{{ data.country_code }} " + itemName;
+                                    console.log("searchName:", searchName); // Log the value of searchName to the console
+            
+                                    // Construct the Bing Maps Geocoding API URL
+                                    var apiKey = 'As8cGdY7hdZLbyXrOZXv4oU4IdQ3En7Zl5XoloWZ3X8B3lfRNUQ9RwK6k1q3lOiN';
+                                    var url = `https://dev.virtualearth.net/REST/v1/Locations?q=${encodeURIComponent(searchName)}&key=${apiKey}`;
+            
+                                    var promise = fetch(url)
+                                        .then(function(response) {
+                                            return response.json();
+                                        })
+                                        .then(function(data) {
+                                            if (data.resourceSets && data.resourceSets.length > 0 && data.resourceSets[0].resources.length > 0) {
+                                                var location = data.resourceSets[0].resources[0].point.coordinates;
+                                                var lat = location[0];
+                                                var lon = location[1];
+                                                var marker = L.marker([lat, lon]).addTo(map);
+                                                marker.bindPopup(itemName + '<br>Quantity: ' + quantity + ' {{data.unit}}');
+                                                
+                                                // Add marker position to bounds
+                                                bounds.push([lat, lon]);
+                                            }
+                                        })
+                                        .catch(function(error) {
+                                            console.log('Error geocoding item:', error);
+                                        });
+                                    
+                                    promises.push(promise);
+                                });
+                                
+                                Promise.all(promises)
+                                    .then(function() {
+                                        // Fit the map bounds to include all markers
+                                        if (bounds.length > 0) {
+                                            map.fitBounds(bounds);
+                                        }
+                                        resolve();
+                                    })
+                                    .catch(function(error) {
+                                        reject(error);
+                                    });
+                            });
+                        }
+                        // Get towns data passed from Django view
+                        var townsData = {{ data.formatted_data|safe }};
+                        // Initialize map and add markers
+                        var mapTowns = initializeMap('map_3');
+                        addMarkers(mapTowns, townsData)
+                            .then(function() {
+                                console.log('Markers added successfully');
+                            })
+                            .catch(function(error) {
+                                console.error('Error adding markers:', error);
+                            });
+                          });
+                    
+                </script>
+                  {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-6">
+            <div class="card z-index-2">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    <h6>Fuel By Time</h6>
+                    <p class="text-sm mb-0">
+                      <i class="fa fa-arrow-up text-info" aria-hidden="true"></i>
+                      <span class="font-weight-bold ms-1">Still in test :</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-5 my-auto text-end">
+                    <div class="dropdown float-lg-end pe-4">
+                      <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v text-secondary" aria-hidden="true"></i>
+                      </a>
+                      <ul class="dropdown-menu px-2 py-3 ms-sm-n9 ms-n5" aria-labelledby="dropdownTable">
+                        <li>
+                          <span class="dropdown-item border-radius-md" href="javascript:;">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                            Select Date
+                          </span>
+                        </li>
+                        <!-- Add other dropdown items as needed -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3" style="height: 350px;"> <!-- Set a fixed height for the card body -->
+                <div class="chart2">
+                  <canvas id="chart-bar" class="chart-canvas" height="375" width="1048" style="display: block; box-sizing: border-box; height: 300px; width: 838.4px;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card z-index-2">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-12 col-7">
+                    {% if data.geo_filter == 1%}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By Country</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By Country (In Dollar)</h6>
+                        {% endif %}
+                    {% elif data.geo_filter == 2%}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By Town</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By Town (In Dollar)</h6>
+                        {% endif %}
+                    {% else %}
+                        {% if data.selection_filter_code == 1%}
+                        <h6>Fuel Conumption By StopOver</h6>
+                        {% else %}
+                        <h6>Fuel Expenses By StopOver (In Dollar)</h6>
+                        {% endif %}
+                    {% endif %}
+                    <p class="text-sm mb-0">
+                      <i class="fa fa-tint text-info" aria-hidden="true"></i>
+                      <span class="font-weight-bold ms-1">Unit : {{data.unit}}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3" style="height: 350px;">
+                <div style="max-height: 350px; overflow-y: auto;">
+                  <div id="table_div"><div class="google-visualization-table" style="position: relative; z-index: 0; max-width: 100%; max-height: 100%; width: 100%; height: 100%;"><div style="position: relative; overflow: auto; max-width: 100%; max-height: 100%; width: 100%;"><table cellspacing="0" class="google-visualization-table-table" style="width: 100%; height: 100%;"><thead><tr class="table-header-row"><th class="table-header-cell">&nbsp;</th><th class="table-header-cell">Name</th><th class="table-header-cell google-visualization-table-type-number">Salary</th><th class="table-header-cell google-visualization-table-type-bool">Full Time Employee</th></tr></thead><tbody></tbody></table></div><div class="google-visualization-table-div-page gradient"><div class="goog-inline-block goog-custom-button goog-custom-button-disabled goog-custom-button-collapse-right" role="button" aria-disabled="true" style="user-select: none;"><div class="goog-inline-block goog-custom-button-outer-box"><div class="goog-inline-block goog-custom-button-inner-box"><span class="google-visualization-table-page-prev"></span></div></div></div><div class="goog-inline-block goog-custom-button goog-custom-button-collapse-left" role="button" tabindex="0" style="user-select: none;"><div class="goog-inline-block goog-custom-button-outer-box"><div class="goog-inline-block goog-custom-button-inner-box"><span class="google-visualization-table-page-next"></span></div></div></div></div><div style="clear: both; width: 100%; height: 0px;"></div></div></div> <!-- This is where the table will be rendered -->
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Google Charts Table Script -->
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['table']});
+            google.charts.setOnLoadCallback(drawTable);
+          
+            function drawTable() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Country');
+              data.addColumn('number', 'Quantity');
+              data.addRows(
+                {{data.formatted_data|safe}}
+              );
+          
+              var table = new google.visualization.Table(document.getElementById('table_div'));
+          
+              // Set options for the table
+              var options = {
+                showRowNumber: true,
+                width: '100%',
+                height: '100%',
+                page: 'enable',
+                pageSize: 10,  // Show 10 rows per page
+                // Customize table design
+                cssClassNames: {
+                  headerRow: 'table-header-row',
+                  tableRow: 'table-row',
+                  oddTableRow: 'table-row-odd',
+                  selectedTableRow: 'table-row-selected',
+                  hoverTableRow: 'table-row-hover',
+                  headerCell: 'table-header-cell',
+                  tableCell: 'table-cell',
+                }
+              };
+          
+              table.draw(data, options);
+            }
+          </script>
+          
+          <style>
+            /* Custom CSS for Google Charts table */
+            .table-header {
+              background-color: #007bff; /* Header background color */
+              color: #fff; /* Header text color */
+            }
+
+            .table-row {
+              background-color: #f8f9fa; /* Row background color */
+              color: #333; /* Row text color */
+            }
+
+            .table-row-selected {
+              background-color: #cce5ff; /* Selected row background color */
+            }
+
+            .table-row-hover {
+              background-color: #d6d8db; /* Hovered row background color */
+            }
+
+            .table-header-cell,
+            .table-cell {
+              padding: 12px; /* Cell padding */
+            }
+
+          </style>
+        </div>
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div
+                  class="copyright text-center text-sm text-muted text-lg-start"
+                >
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  Tunisair Stagiaires
+                  <a class="font-weight-bold" target="_blank"></a>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul
+                  class="nav nav-footer justify-content-center justify-content-lg-end"
+                >
+                  <li class="nav-item">
+                    <a
+                      href="https://www.tunisair.com"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >Company</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.tunisair.com/fr/presentation"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >About Us</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://creative-tim.com/blog"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >Blog</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.creative-tim.com/license"
+                      class="nav-link pe-0 text-muted"
+                      target="_blank"
+                      >License</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+    {% include 'settings.html' %}
+    <!--   Settings   -->
+
+    <!--   Core JS Files   -->
+    <script src="../static/js/core/popper.min.js"></script>
+    <script src="../static/js/core/bootstrap.min.js"></script>
+    <script src="../static/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../static/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../static/js/plugins/chartjs.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+   
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../static/js/soft-ui-dashboard.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../static/img/apple-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../static/img/Tunisair_llogo_Deer.png"
+    />
+    <title>Tunisair Dashboard</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="../static/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    {% if data.dark_mode == 1 %}
+    <link id="pagestyle" href="/static/css/tunisair-dashboard.css" rel="stylesheet">
+    {% else %}
+    <link id="pagestyle" href="/static/css/tunisair-dashboard-dark-mode.css" rel="stylesheet">
+    {% endif %}
+  </head>
+
+  <body class="g-sidenav-show bg-gray-100">
+    {% include 'navbar.html' %}
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+        id="navbarBlur"
+        navbar-scroll="true"
+      >
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
+            >
+              <li class="breadcrumb-item text-sm">
+                <a class="opacity-5 text-dark" href="../">Tunisair</a>
+              </li>
+              <li
+                class="breadcrumb-item text-sm text-dark active"
+                aria-current="page"
+              >
+                Aircrafts
+              </li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Aircrafts</h6>
+          </nav>
+          <div
+            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+            id="navbar"
+          >
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item d-flex align-items-center">
+                <a
+                  href="../profile"
+                  class="nav-link text-body font-weight-bold px-0"
+                >
+                  <i class="fa fa-user me-sm-1"></i>
+                  <span class="d-sm-inline d-none">{{data.username}}</span>
+                </a>
+              </li>
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="iconNavbarSidenav"
+                >
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-body p-0">
+                  <i
+                    class="fa fa-cog fixed-plugin-button-nav cursor-pointer"
+                  ></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fa fa-bell cursor-pointer"></i>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../static/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New message</span>
+                            from Laur
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            13 minutes ago
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../static/img/small-logos/logo-spotify.svg"
+                            class="avatar avatar-sm bg-gradient-dark me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New album</span> by
+                            Travis Scott
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            1 day
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div
+                          class="avatar avatar-sm bg-gradient-secondary me-3 my-auto"
+                        >
+                          <svg
+                            width="12px"
+                            height="12px"
+                            viewBox="0 0 43 36"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <title>credit-card</title>
+                            <g
+                              stroke="none"
+                              stroke-width="1"
+                              fill="none"
+                              fill-rule="evenodd"
+                            >
+                              <g
+                                transform="translate(-2169.000000, -745.000000)"
+                                fill="#FFFFFF"
+                                fill-rule="nonzero"
+                              >
+                                <g
+                                  transform="translate(1716.000000, 291.000000)"
+                                >
+                                  <g
+                                    transform="translate(453.000000, 454.000000)"
+                                  >
+                                    <path
+                                      class="color-background"
+                                      d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                      opacity="0.593633743"
+                                    ></path>
+                                    <path
+                                      class="color-background"
+                                      d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"
+                                    ></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            Payment successfully completed
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            2 days
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Top Aircraft
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        {{data.top_aircraft}}
+                        <span class="text-success text-sm font-weight-bolder"
+                          ></span
+                        >
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div
+                      class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                    >
+                      <i
+                        class="fa fa-truck text-lg opacity-10"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Total Consumption
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        {{data.sum}} {{data.unit}}
+                        <span class="text-success text-sm font-weight-bolder"
+                          >+3%</span
+                        >
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div
+                      class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                    >
+                      <i
+                        class="fa fa-tint text-lg opacity-10"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Avg Taxes
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        +3,462
+                        <span class="text-danger text-sm font-weight-bolder"
+                          >-2%</span
+                        >
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div
+                      class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                    >
+                      <i
+                        class="ni ni-paper-diploma text-lg opacity-10"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="numbers">
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                        Sales
+                      </p>
+                      <h5 class="font-weight-bolder mb-0">
+                        $103,430
+                        <span class="text-success text-sm font-weight-bolder"
+                          >+5%</span
+                        >
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div
+                      class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                    >
+                      <i
+                        class="ni ni-cart text-lg opacity-10"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <div class="card z-index-2">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    <h6>Fuel By Aircrafts (In {{data.unit}})</h6>
+                    <p class="text-sm mb-0">
+                      <i
+                        class="fa fa-arrow-up text-info"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="font-weight-bold ms-1">Top Aircraft :</span> {{data.top_aircraft}}
+                    </p>
+                  </div>
+                  <div class="col-lg-6 col-5 my-auto text-end">
+                    <div class="dropdown float-lg-end pe-4">
+                      <a
+                        class="cursor-pointer"
+                        id="dropdownTable"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i
+                          class="fa fa-ellipsis-v text-secondary"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+                      <ul
+                        class="dropdown-menu px-2 py-3 ms-sm-n9 ms-n5"
+                        aria-labelledby="dropdownTable"
+                      >
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            Select Date</span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                          >
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Week
+                          </span>
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Month</span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Trimester</span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Semester</span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            class="dropdown-item border-radius-md"
+                            href="javascript:;"
+                            ><i class="fa fa-caret-left" aria-hidden="true"></i>
+                            By Year</span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="chart">
+                  <canvas
+                    id="chart-bar"
+                    class="chart-canvas"
+                    height="500"
+                  ></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="d-flex flex-column h-100">
+                      <p class="mb-1 pt-2 text-bold">Built by interns</p>
+                      <h5 class="font-weight-bolder">Tunisair Dashboard</h5>
+                      <p class="mb-5">
+                        Tunisair is the national airline of Tunisia. Formed in
+                        1948, it operates scheduled international services to
+                        four continents. Its main base is Tunis–Carthage
+                        International Airport. The airline's head office is in
+                        Tunis, near Tunis Airport.
+                      </p>
+                      <a
+                        class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
+                        href="javascript:;"
+                      >
+                        Read More
+                        <i
+                          class="fas fa-arrow-right text-sm ms-1"
+                          aria-hidden="true"
+                        ></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                    <div class="bg-gradient-primary border-radius-lg h-100">
+                      <img
+                        src="../static/img/shapes/waves-white.svg"
+                        class="position-absolute h-100 w-50 top-0 d-lg-block d-none"
+                        alt="waves"
+                      />
+                      <div
+                        class="position-relative d-flex align-items-center justify-content-center h-100"
+                      >
+                        <img
+                          class="w-100 position-relative z-index-2 pt-4"
+                          src="../static/img/illustrations/rocket-white.png"
+                          alt="rocket"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card h-100">
+              <div class="card-header pb-0">
+                <h6>Orders overview</h6>
+                <p class="text-sm">
+                  <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
+                  <span class="font-weight-bold">24%</span> this month
+                </p>
+              </div>
+              <div class="card-body p-3">
+                <div class="timeline timeline-one-side">
+                  <div class="timeline-block mb-3">
+                    <span class="timeline-step">
+                      <i class="ni ni-bell-55 text-success text-gradient"></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        $2400, Design changes
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        22 DEC 7:20 PM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-block mb-3">
+                    <span class="timeline-step">
+                      <i class="ni ni-html5 text-danger text-gradient"></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        New order #1832412
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        21 DEC 11 PM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-block mb-3">
+                    <span class="timeline-step">
+                      <i class="ni ni-cart text-info text-gradient"></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        Server payments for April
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        21 DEC 9:34 PM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-block mb-3">
+                    <span class="timeline-step">
+                      <i
+                        class="ni ni-credit-card text-warning text-gradient"
+                      ></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        New card added for order #4395133
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        20 DEC 2:20 AM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-block mb-3">
+                    <span class="timeline-step">
+                      <i class="ni ni-key-25 text-primary text-gradient"></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        Unlock packages for development
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        18 DEC 4:54 AM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-block">
+                    <span class="timeline-step">
+                      <i class="ni ni-money-coins text-dark text-gradient"></i>
+                    </span>
+                    <div class="timeline-content">
+                      <h6 class="text-dark text-sm font-weight-bold mb-0">
+                        New order #9583120
+                      </h6>
+                      <p
+                        class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                      >
+                        17 DEC
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div
+                  class="copyright text-center text-sm text-muted text-lg-start"
+                >
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  Tunisair Stagiaires
+                  <a class="font-weight-bold" target="_blank"></a>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul
+                  class="nav nav-footer justify-content-center justify-content-lg-end"
+                >
+                  <li class="nav-item">
+                    <a
+                      href="https://www.tunisair.com"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >Company</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.tunisair.com/fr/presentation"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >About Us</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://creative-tim.com/blog"
+                      class="nav-link text-muted"
+                      target="_blank"
+                      >Blog</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="https://www.creative-tim.com/license"
+                      class="nav-link pe-0 text-muted"
+                      target="_blank"
+                      >License</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    {% include 'settings.html' %}
+    
+    <!--   Core JS Files   -->
+    <script src="../static/js/core/popper.min.js"></script>
+    <script src="../static/js/core/bootstrap.min.js"></script>
+    <script src="../static/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../static/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../static/js/plugins/chartjs.min.js"></script>
+    <script>
+      var ctx2 = document.getElementById("chart-bar").getContext("2d");
+      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+      gradientStroke1.addColorStop(1, "rgba(212, 4, 4, 0.2)"); // Main color #d40404 with 20% opacity
+      gradientStroke1.addColorStop(0.2, "rgba(72, 72, 176, 0.0)"); // Other color with 0% opacity
+      gradientStroke1.addColorStop(0, "rgba(212, 4, 4, 0)"); // Main color #d40404 with 0% opacity
+
+
+      new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: {{data.aircraft_names|safe}},
+          datasets: [
+            {
+              label: "Fuel Consumption",
+              tension: 0.4,
+              borderWidth: 0,
+              pointRadius: 0,
+              borderColor: "#d40404",
+              borderWidth: 3,
+              backgroundColor: gradientStroke1,
+              fill: true,
+              data: {{data.aircraft_fuel_quantities|safe}},
+              maxBarThickness: 50,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+          interaction: {
+            intersect: false,
+            mode: "index",
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+              },
+              ticks: {
+                display: true,
+                padding: 10,
+                color: "#b2b9bf",
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: "normal",
+                  lineHeight: 2,
+                },
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+                borderDash: [5, 5],
+              },
+              ticks: {
+                display: true,
+                color: "#b2b9bf",
+                padding: 20,
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: "normal",
+                  lineHeight: 2,
+                },
+              },
+            },
+          },
+        },
+      });
+    
+    // Function to generate a list of distinguishable colors
+    function generateColors(count) {
+        const colors = [
+            '#D40404', '#A0153E', '#5D0E41', '#00224D', '#FF204E',
+        ];
+        const generatedColors = [];
+        for (let i = 0; i < count; i++) {
+            generatedColors.push(colors[i % colors.length]);
+        }
+        return generatedColors;
+    }
+    
+    </script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../static/js/soft-ui-dashboard.min.js"></script>
+  </body>
+</html>
